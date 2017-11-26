@@ -2,6 +2,10 @@
 
 Alticonnection provides an infrastructure that facilitates a file exchange between clients through server. Communication between client and server uses TCP.
 
+## Technology
+Java NIO
+Event driven programming
+
 ## Server
 
 Server can handle an arbitrary number of concurrent connections and file exchanges, only limited by system configuration or memory. The server is started without any parameters and creates a TCP socket at an OS-assigned port. It prints out the assigned port number and store it in a local file port, which is used when starting clients. The server listens on its main socket and accepts client connections as they arrive. Clients perform an upload or download operation, or instruct the server to terminate.
