@@ -3,7 +3,9 @@
 Alticonnection provides an infrastructure that facilitates a file exchange between clients through server. Communication between client and server uses TCP.
 
 ## Technology
+
 Java NIO
+
 Event driven programming
 
 ## Server
@@ -15,8 +17,11 @@ When the server receives the termination command from a client, it closes all wa
 ## Communication
 
 The data stream sent from the client to the server adheres to the following format:
+
     command 1 		ASCII character: G (get = download), P (put = upload), or F (finish = termination)
+    
     key     8 		ASCII characters (padded at the end by '\0'-characters, if necessary)
+    
 In case of an upload, the above 9-byte control information is immediately followed by the binary data stream of
 the file. In case of download, the server responds with the binary data stream of the file. When a client has
 completed a file upload, it closes the connection. Then the server closes the download connection to the other
@@ -25,8 +30,11 @@ client.
 ## Client Program
 
 The client takes up to 6 parameters and can be invoked in 3 different ways:
+
     1. terminate server: client <host> <port> F
+    
     2. download: client <host> <port> G<key> <file name> <recv size>
+    
     3. upload: client <host> <port> P<key> <file name> <send size> <wait time>
 
 The client creates a TCP socket and connects to the server at <host> and <port>. It then transmits the command string given in the 3rd shell parameter to the server as described above, i.e., with padding. When transmitting an 'F' command, the client sends an empty key, i.e., 8 '\0'-characters. When requesting an upload or download, it reads data from or stores data to, respectively, the file specified in the 4th parameter. When uploading and the 4th parameter is given as an integer number, the number is taken as the virtual file size in bytes. In this case, the sender application does not transmit the contents of an actual file, but empty/random data equivalent to the virtual file size.
