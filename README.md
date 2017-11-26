@@ -62,6 +62,10 @@ I have one AbstractClient class and three other concrete classes: Downloader, Up
 	Downloader - sends a request to download to the server, then waits to receive data.
 	Uploader - sends upload requests and then sends data packets to server.
 	Terminator - sends a termination request.
+	
+## How to build?
+
+To build both server and client, run: make all.
 
 ## P.S. I am using the following version of Java:
 
